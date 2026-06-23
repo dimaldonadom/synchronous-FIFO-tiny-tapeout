@@ -31,7 +31,7 @@ async def test_fifo(dut):
     assert full_flag == 0, "Error: La bandera 'full' NO debería ser 1 tras el reset."
 
     # Variables para autoverificación
-    DEPTH = 8
+    DEPTH = 16
     written_data = []
 
     # 1. Prueba de ESCRITURA hasta llenar la memoria
