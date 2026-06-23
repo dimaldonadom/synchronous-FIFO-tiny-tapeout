@@ -23,7 +23,7 @@ module fifo #(
 )(
     // Inputs
     input wire clk,
-    input wire rst_n,
+    input wire rst,
     input wire wr_en,
     input wire rd_en,
     input wire [WIDTH-1:0] d_in,
@@ -43,8 +43,8 @@ reg [AW:0] rd_ptr_q, rd_ptr_n;
 reg [WIDTH-1:0] d_out_q, d_out_n;
 
 // DFF - d_out 
-always @(posedge clk or negedge rst_n) begin
-    if (rst_n) begin
+always @(posedge clk or posedge rst) begin
+    if (rst) begin
         d_out_q <= 0;
     end else begin
         d_out_q <= d_out_n;
@@ -52,8 +52,8 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 // DFF - MEM 
-always @(posedge clk or negedge rst_n) begin
-    if (rst_n) begin
+always @(posedge clk or posedge rst) begin
+    if (rst) begin
         MEM <= 0;
     end else if(wr_en && !full && !(rd_en && empty)) begin
         MEM[wr_ptr_q[AW-1:0]] <= d_in;
@@ -61,8 +61,8 @@ always @(posedge clk or negedge rst_n) begin
 end
 
 // DFF - wr_ptr and rd_ptr
-always @(posedge clk or negedge rst_n) begin
-    if (rst_n) begin
+always @(posedge clk or posedge rst) begin
+    if (rst) begin
         wr_ptr_q <= 0;
         rd_ptr_q <= 0;
     end else begin

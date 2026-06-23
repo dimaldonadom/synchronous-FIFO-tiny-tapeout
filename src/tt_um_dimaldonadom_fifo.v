@@ -25,16 +25,18 @@ module tt_um_dimaldonadom_fifo(
     wire rd_en_i;
     wire full_o;
     wire empty_o;
+    wire rst;
 
     assign wr_en_i = uio_in[0];
     assign rd_en_i = uio_in[1];
+    assign rst = ~rst_n;
 
     fifo #(
         .WIDTH(8),
         .DEPTH(16)
     ) fifo_inst (
         .clk(clk),
-        .rst_n(rst_n),
+        .rst(rst),
         .wr_en(wr_en_i),
         .d_in(ui_in),
         .rd_en(rd_en_i),
