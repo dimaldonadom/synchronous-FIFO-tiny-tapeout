@@ -1,52 +1,50 @@
 # Tiny Tapeout project information
 project:
-  title:        ""      # Project title
-  author:       ""      # Your name
-  discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  ""      # One line description of what your project does
-  language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
-  clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
+  title:        "Synchronous FIFO"         # Project title
+  author:       "Diego Maldonado"          # Your name
+  discord:      ""                         # Your discord username (optional)
+  description:  "8-bit width, 16-word depth Synchronous FIFO" # One line description
+  language:     "SystemVerilog" 
+  clock_hz:     20000000                   # 20 MHz (equivalente al periodo de 50 ns)
 
-  # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "1x1"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  # How many tiles your design occupies? A single tile is about 160x100 uM.
+  tiles: "1x1"          
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
-  top_module:  "tt_um_example"
+  top_module:  "tt_um_dimaldonadom_fifo"
 
   # List your project's source files here.
-  # Source files must be in ./src and you must list each source file separately, one per line.
-  # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "project.v"
+    - "tt_um_dimaldonadom_fifo.v"
+    - "fifo.sv"                        # Asegúrate de incluir el core de tu diseño
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
-# This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
-  # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
-  ui[5]: ""
-  ui[6]: ""
-  ui[7]: ""
+  # Inputs 
+  ui[0]: "d_in[0]"
+  ui[1]: "d_in[1]"
+  ui[2]: "d_in[2]"
+  ui[3]: "d_in[3]"
+  ui[4]: "d_in[4]"
+  ui[5]: "d_in[5]"
+  ui[6]: "d_in[6]"
+  ui[7]: "d_in[7]"
 
-  # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  # Outputs 
+  uo[0]: "d_out[0]"
+  uo[1]: "d_out[1]"
+  uo[2]: "d_out[2]"
+  uo[3]: "d_out[3]"
+  uo[4]: "d_out[4]"
+  uo[5]: "d_out[5]"
+  uo[6]: "d_out[6]"
+  uo[7]: "d_out[7]"
 
-  # Bidirectional pins
-  uio[0]: ""
-  uio[1]: ""
-  uio[2]: ""
-  uio[3]: ""
+  # Bidirectional pins (Usados para las señales de control y banderas)
+  uio[0]: "wr_en"      # write enable
+  uio[1]: "rd_en"      # read enable
+  uio[2]: "full"       # FIFO full flag
+  uio[3]: "empty"      # FIFO empty flag
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
